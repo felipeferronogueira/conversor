@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Bases Numéricas</title>
+</head>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        color: #333;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .container {
+        background-color: white;
+        padding: 30px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        max-width: 500px;
+        margin: auto;
+    }
+
+    input,
+    select,
+    button {
+        margin: 10px 0;
+        padding: 10px;
+        width: 10vw;
+        font-size: 16px;
+    }
+
+    .result {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #e6f7ff;
+        border: 1px solid #91d5ff;
+        border-radius: 5px;
+        text-align: left;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h1>Conversor de Bases Numéricas</h1>
+        <label for="base">Escolha a base do número:</label><br>
+        <select id="select_base">
+            <option value="binario">Binário</option>
+            <option value="octal">Octal</option>
+            <option value="decimal">Decimal</option>
+            <option value="hexadecimal">Hexadecimal</option>
+        </select> <br>
+
+        <label for="valor">Insira o valor:</label><br>
+        <input type="text" id="ipt_valor" placeholder="Digite o valor" /> <br>
+
+        <button onclick="converter()">Converter</button>
+
+        <div id="resultado" class="result" style="display: none;"></div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    function converter() {
+        const base = select_base.value;
+        const valor = ipt_valor.value;
+        /home/aluno/Downloads/conversor.html
+        if (!valor) {
+            alert("Por favor, insira um valor para converter.");
+            return;
+        }
+
+        var decimal;
+        
+        try {
+            switch (base) {
+                case "binario":
+                    if (!/^[01]+$/.test(valor)) {
+                        throw "Valor binário inválido.";
+                    }
+                    decimal = parseInt(valor, 2);
+                    break;
+
+                case "octal":
+                    if (!/^[0-7]+$/.test(valor)) {
+                        throw "Valor octal inválido.";
+                    }
+                    decimal = parseInt(valor, 8);
+                    break;
+
+                case "decimal":
+                    if (!/^\d+$/.test(valor)) {
+                        throw "Valor decimal inválido.";
+                    }
+                    decimal = parseInt(valor, 10);
+                    break;
+
+                case "hexadecimal":
+                    if (!/^[0-9a-fA-F]+$/.test(valor) || valor > 9) {
+                        throw "Valor hexadecimal inválido.";
+                    }
+                    decimal = parseInt(valor, 16);
+                    break;
+
+            }
+
+            const binario = decimal.toString(2);
+            const octal = decimal.toString(8);
+            const hexadecimal = decimal.toString(16).toUpperCase();
+
+            resultado.innerHTML = `
+                    <strong>Resultados:</strong><br>
+                    Decimal: ${decimal}<br>  
+                    Binário: ${binario}<br>
+                    Octal: ${octal}<br>
+                    Hexadecimal: ${hexadecimal}
+                `;
+            resultado.style.display = "block";
+        } catch (error) {
+            alert(error);
+            resultado.style.display = "none";
+        }
+    }
+</script>
