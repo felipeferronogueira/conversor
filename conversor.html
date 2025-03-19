@@ -5,62 +5,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conversor de Bases Numéricas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
-        color: #333;
-        text-align: center;
-        padding: 20px;
-    }
-
-    .container {
-        background-color: white;
-        padding: 30px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-        max-width: 500px;
-        margin: auto;
-    }
-
-    input,
-    select,
-    button {
-        margin: 10px 0;
-        padding: 10px;
-        width: 10vw;
-        font-size: 16px;
-    }
-
-    .result {
-        margin-top: 20px;
-        padding: 10px;
-        background-color: #e6f7ff;
-        border: 1px solid #91d5ff;
-        border-radius: 5px;
-        text-align: left;
+    body 
+    {
+        font-family: 'Lato', sans-serif;
     }
 </style>
 
-<body>
-    <div class="container">
-        <h1>Conversor de Bases Numéricas</h1>
-        <label for="base">Escolha a base do número:</label><br>
-        <select id="select_base">
-            <option value="binario">Binário</option>
-            <option value="octal">Octal</option>
-            <option value="decimal">Decimal</option>
-            <option value="hexadecimal">Hexadecimal</option>
-        </select> <br>
+<body class="h-screen flex justify-center items-center">
+    <div class="flex flex-row bg-sky-200 rounded-lg shadow-xl overflow-hidden">
+        <div class="flex items-center flex-col bg-neutral-200 p-10">
+            <h1 class="font-bold mb-6">Conversor de Bases Numéricas</h1>
 
-        <label for="valor">Insira o valor:</label><br>
-        <input type="text" id="ipt_valor" placeholder="Digite o valor" /> <br>
+            <div class="w-full pt-4 pb-2" id="div_opcoes">
+                <label for="base">Escolha a base do número</label>
+                <select id="select_base" class="p-2 rounded-lg w-full mt-1">
+                    <option value="binario">Binário</option>
+                    <option value="octal">Octal</option>
+                    <option value="decimal">Decimal</option>
+                    <option value="hexadecimal">Hexadecimal</option>
+                </select>
+            </div>
 
-        <button onclick="converter()">Converter</button>
+            <div class="grid w-full justify-items-start content-start mt-1" id="div_valor">
+                <label for="valor" class="mr-4">Insira o valor</label>
+                <input class="rounded-lg p-2 mt-1 w-full" type="text" id="ipt_valor" placeholder="Digite o valor"/>
+            </div>
 
-        <div id="resultado" class="result" style="display: none;"></div>
+            <div class="w-full">
+                <button onclick="converter()" class="transition-all duration-300 ease-in-out mt-12 bg-sky-700 w-full py-2 rounded-lg text-neutral-100 hover:bg-sky-600">Converter</button>
+            </div>
+
+        </div>
+
+        <div class="py-10 px-20">
+            <div class="font-bold" id="resultado">O resultado é de</div>
+        </div>
     </div>
 </body>
 
@@ -121,10 +107,10 @@
                     Octal: ${octal}<br>
                     Hexadecimal: ${hexadecimal}
                 `;
-            resultado.style.display = "block";
+           // resultado.style.display = "block";
         } catch (error) {
             alert(error);
-            resultado.style.display = "none";
+          //  resultado.style.display = "none";
         }
     }
 </script>
