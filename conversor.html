@@ -8,12 +8,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+        rel="stylesheet">
 </head>
 
 <style>
-    body 
-    {
+    body {
         font-family: 'Lato', sans-serif;
     }
 </style>
@@ -35,11 +36,12 @@
 
             <div class="grid w-full justify-items-start content-start mt-1" id="div_valor">
                 <label for="valor" class="mr-4">Insira o valor</label>
-                <input class="rounded-lg p-2 mt-1 w-full" type="text" id="ipt_valor" placeholder="Digite o valor"/>
+                <input class="rounded-lg p-2 mt-1 w-full" type="text" id="ipt_valor" placeholder="Digite o valor" />
             </div>
 
             <div class="w-full">
-                <button onclick="converter()" class="transition-all duration-300 ease-in-out mt-12 bg-sky-700 w-full py-2 rounded-lg text-neutral-100 hover:bg-sky-600">Converter</button>
+                <button onclick="conversao()"
+                    class="transition-all duration-300 ease-in-out mt-12 bg-sky-700 w-full py-2 rounded-lg text-neutral-100 hover:bg-sky-600">Converter</button>
             </div>
 
         </div>
@@ -53,17 +55,17 @@
 </html>
 
 <script>
-    function converter() {
+    function conversao() {
         const base = select_base.value;
         const valor = ipt_valor.value;
-        /home/aluno/Downloads/conversor.html
+
         if (!valor) {
             alert("Por favor, insira um valor para converter.");
             return;
         }
 
         var decimal;
-        
+
         try {
             switch (base) {
                 case "binario":
@@ -107,10 +109,11 @@
                     Octal: ${octal}<br>
                     Hexadecimal: ${hexadecimal}
                 `;
-           // resultado.style.display = "block";
+
+            resultado.style.display = "block";
         } catch (error) {
             alert(error);
-          //  resultado.style.display = "none";
+            resultado.style.display = "none";
         }
     }
 </script>
