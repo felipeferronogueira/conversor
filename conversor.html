@@ -8,24 +8,27 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/6921956092.js" crossorigin="anonymous"></script>
 </head>
 
 <style>
     body {
         font-family: 'Lato', sans-serif;
     }
+    button {
+        transition: background-color 0.3s ease-in-out;
+    }
+
 </style>
 
 <body class="h-screen flex justify-center items-center">
-    <div class="flex flex-row bg-sky-200 rounded-lg shadow-xl overflow-hidden">
-        <div class="flex items-center flex-col bg-neutral-200 p-10">
+    <div class="flex flex-row bg-purple-200 rounded-lg shadow-xl  overflow-hidden">
+        <div class="flex items-center flex-col bg-neutral-200 p-10 rounded-lg">
             <h1 class="font-bold mb-6">Conversor de Bases Numéricas</h1>
 
             <div class="w-full pt-4 pb-2" id="div_opcoes">
-                <label for="base">Escolha a base do número</label>
+                <label for="base" class="opacity-65">Escolha a base do número</label>
                 <select id="select_base" class="p-2 rounded-lg w-full mt-1">
                     <option value="binario">Binário</option>
                     <option value="octal">Octal</option>
@@ -35,19 +38,27 @@
             </div>
 
             <div class="grid w-full justify-items-start content-start mt-1" id="div_valor">
-                <label for="valor" class="mr-4">Insira o valor</label>
+                <label for="valor" class="mr-4 opacity-65">Insira o valor</label>
                 <input class="rounded-lg p-2 mt-1 w-full" type="text" id="ipt_valor" placeholder="Digite o valor" />
             </div>
 
             <div class="w-full">
-                <button onclick="conversao()"
-                    class="transition-all duration-300 ease-in-out mt-12 bg-sky-700 w-full py-2 rounded-lg text-neutral-100 hover:bg-sky-600">Converter</button>
+                <button onclick="conversao()" class="transition-all duration-300 ease-in-out mt-10 bg-purple-700 w-full py-2 rounded-lg text-neutral-100 hover:bg-purple-500"> Converter </button>
             </div>
 
         </div>
 
         <div class="py-10 px-20">
-            <div class="font-bold" id="resultado">O resultado é de</div>
+            <div class="flex flex-col">
+                <h1 class="font-bold">O resultado das operações</h1>
+                    <div class="flex flex-row" id="resultado">
+                    </div>
+            </div>
+
+            <div class="w-full">
+                <button class="transition-all duration-300 ease-in-out mt-10 bg-purple-700 w-full py-2 rounded-lg text-neutral-100 hover:bg-purple-500"> Ir para calculadora </button>
+            </div>
+
         </div>
     </div>
 </body>
@@ -102,12 +113,13 @@
             const octal = decimal.toString(8);
             const hexadecimal = decimal.toString(16).toUpperCase();
 
-            resultado.innerHTML = `
-                    <strong>Resultados:</strong><br>
-                    Decimal: ${decimal}<br>  
-                    Binário: ${binario}<br>
-                    Octal: ${octal}<br>
-                    Hexadecimal: ${hexadecimal}
+            resultado.innerHTML += `
+                    
+                    <br>
+                    Decimal <span class="mx-2"> <i class="fa-solid fa-right-long mr-2"></i> ${decimal}<br>  
+                    Binário <span class="mx-2"> <i class="fa-solid fa-right-long mr-2"></i>${binario}<br>
+                    Octal <span class="mx-2"> <i class="fa-solid fa-right-long mr-2"></i> ${octal}<br>
+                    Hexadecimal <span class="mx-2"> <i class="fa-solid fa-right-long mr-2"></i> ${hexadecimal}
                 `;
 
             resultado.style.display = "block";
