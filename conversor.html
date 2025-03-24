@@ -20,9 +20,17 @@
     </style>
 </head>
 
-<body class="h-screen flex justify-center items-center">
+<body class="h-screen flex justify-center items-center flex flex-col">
+
+    <!-- Background :<
+    <div class="bg-[url(https://wallpapers.com/images/hd/aura-mac-book-gradient-background-6dc00921pk556izr.jpg)] bg-no-repeat bg-cover w-full h-full z-[-1] absolute">
+    </div> 
+    -->
+
+    <h1 class="font-extrabold text-purple-950 text-xl">SPTecher's Machine <i class="fa-solid fa-gears"></i></h1>
+
     <div class="flex flex-row bg-purple-200 rounded-lg shadow-xl overflow-hidden" id="conversor">
-        <div class="flex items-center flex-col bg-neutral-200 p-10 rounded-lg">
+        <div class="flex items-center flex-col bg-neutral-200 p-10 rounded-lg justify-between">
             <h1 class="font-bold mb-6">Conversor de Bases Numéricas</h1>
 
             <div class="w-full pt-4 pb-2" id="div_opcoes">
@@ -47,18 +55,18 @@
             </div>
         </div>
 
-        <div class="py-10 px-20">
+        <div class="py-10 px-20 flex flex-col justify-between">
             <div class="flex flex-col">
                 <h1 class="font-bold">O resultado das operações <i class="fa-solid fa-calculator ml-2"></i></h1>
-                <div class="flex flex-row" id="resultado">
-                    <p>Decimal</p>
-                    <p>Binario</p>
-                    <p>Octal</p>
-                    <p>Hexadecimal</p>
+                <div class="flex flex-col h-full mb-8 gap-[2.1vh]" id="resultado">
+                    <p class="mt-11">Decimal <i class="fa-solid fa-right-long mx-2"></i>0</p>
+                    <p>Binário <i class="fa-solid fa-right-long mx-2"></i>0</p>
+                    <p>Octal <i class="fa-solid fa-right-long mx-2"></i>0</p>
+                    <p>Hexadecimal <i class="fa-solid fa-right-long mx-2"></i>0</p>
                 </div>
             </div>
 
-            <div class="w-full mt-[32.4vh]" id="btn_calculadora">
+            <div class="w-full" id="btn_calculadora">
                 <button onclick="mostrarCalculadora()"
                     class="transition-all duration-300 ease-in-out bg-purple-700 w-full py-2 rounded-lg text-neutral-100 hover:bg-purple-500 hover:scale-105 hover:shadow-lg">
                     Ir para calculadora </button>
@@ -117,13 +125,18 @@
             </div>
         </div>
     
-        <div class="py-10 px-20 w-1/2">
+        <div class="py-10 px-20 w-1/2 flex flex-col justify-between">
             <div class="flex flex-col">
                 <h1 class="font-bold">Resultado da operação <i class="fa-solid fa-calculator ml-2"></i></h1>
-                <div class="flex flex-row pt-4" id="resultado_calculadora"></div>
+                <div class="flex flex-col gap-4 pt-[5.6vh]" id="resultado_calculadora">
+                    <p>Decimal <i class="fa-solid fa-right-long mx-2"></i>0</p>
+                    <p>Binário <i class="fa-solid fa-right-long mx-2"></i>0</p>
+                    <p>Octal <i class="fa-solid fa-right-long mx-2"></i>0</p>
+                    <p>Hexadecimal <i class="fa-solid fa-right-long mx-2"></i>0</p>
+                </div>
             </div>
     
-            <div id="btn_calculadora" class="mt-[63.7vh]">
+            <div id="btn_calculadora">
                 <button onclick="mostrarConversor()"
                     class="transition-all duration-300 ease-in-out bg-purple-700 w-full py-2 rounded-lg text-neutral-100 hover:bg-purple-500">
                     Ir para conversor</button>
@@ -171,7 +184,7 @@
                     break;
 
                 case "hexadecimal":
-                    if (!/^[0-9a-fA-F]+$/.test(valor) || valor > 9) {
+                    if (!/^[0-9a-fA-F]+$/.test(valor)) {
                         throw "Valor hexadecimal inválido.";
                     }
                     decimal = parseInt(valor, 16);
@@ -182,19 +195,16 @@
             const octal = decimal.toString(8);
             const hexadecimal = decimal.toString(16).toUpperCase();
 
-            resultado.innerHTML += `
-                <br>
-                Decimal <span class="mx-2"> <i class="fa-solid fa-right-long mr-2"></i> ${decimal}<br>  
-                Binário <span class="mx-2"> <i class="fa-solid fa-right-long mr-2"></i>${binario}<br>
-                Octal <span class="mx-2"> <i class="fa-solid fa-right-long mr-2"></i> ${octal}<br>
-                Hexadecimal <span class="mx-2"> <i class="fa-solid fa-right-long mr-2"></i> ${hexadecimal}
+            resultado.innerHTML = `
+                    <p class="mt-11">Decimal <i class="fa-solid fa-right-long mx-2"></i> ${decimal}</p>
+                    <p>Binário <i class="fa-solid fa-right-long mx-2"></i>${binario}</p>
+                    <p>Octal <i class="fa-solid fa-right-long mx-2"></i> ${octal}</p>
+                    <p>Hexadecimal<i class="fa-solid fa-right-long mx-2"></i> ${hexadecimal}</p>
             `;
 
-            resultado.style.display = "block";
             document.getElementById("btn_calculadora").classList.replace("mt-[32.4vh]", "mt-[15.1vh]");
         } catch (error) {
             alert(error);
-            resultado.style.display = "none";
         }
     }
 
@@ -320,12 +330,10 @@
         }
 
         resultado_calculadora.innerHTML = `
-            <div class="flex flex-col space-y-2">
-                <p><strong>Decimal</strong> <i class="fa-solid fa-right-long mr-2"></i> ${resultadoDecimal}</p>
-                <p><strong>Binário</strong> <i class="fa-solid fa-right-long mr-2"></i> ${resultadoDecimal.toString(2)}</p>
-                <p><strong>Octal</strong> <i class="fa-solid fa-right-long mr-2"></i> ${resultadoDecimal.toString(8)}</p>
-                <p><strong>Hexadecimal</strong> <i class="fa-solid fa-right-long mr-2"></i> ${resultadoDecimal.toString(16).toUpperCase()}</p>
-            </div>
+                    <p>Decimal <i class="fa-solid fa-right-long mx-2"></i> ${resultadoDecimal}</p>
+                    <p>Binário <i class="fa-solid fa-right-long mx-2"></i>${resultadoDecimal.toString(2)}</p>
+                    <p>Octal <i class="fa-solid fa-right-long mx-2"></i> ${resultadoDecimal.toString(8)}</p>
+                    <p>Hexadecimal<i class="fa-solid fa-right-long mx-2"></i> ${resultadoDecimal.toString(16).toUpperCase()}</p>
         `;
 
     }
