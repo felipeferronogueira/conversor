@@ -4,26 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conversor de Bases Numéricas</title>
+    <title>Conversor e Calculadora de Bases Numéricas</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/6921956092.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+        }
+
+        button {
+            transition: background-color 0.3s ease-in-out;
+        }
+    </style>
 </head>
 
-<style>
-    body {
-        font-family: 'Lato', sans-serif;
-    }
-    button {
-        transition: background-color 0.3s ease-in-out;
-    }
-
-</style>
-
 <body class="h-screen flex justify-center items-center">
-    <div class="flex flex-row bg-purple-200 rounded-lg shadow-xl  overflow-hidden">
+    <div class="flex flex-row bg-purple-200 rounded-lg shadow-xl overflow-hidden" id="conversor">
         <div class="flex items-center flex-col bg-neutral-200 p-10 rounded-lg">
             <h1 class="font-bold mb-6">Conversor de Bases Numéricas</h1>
 
@@ -43,29 +41,97 @@
             </div>
 
             <div class="w-full">
-                <button onclick="conversao()" class="transition-all duration-300 ease-in-out mt-10 bg-purple-700 w-full py-2 rounded-lg text-neutral-100 hover:bg-purple-500"> Converter </button>
+                <button onclick="conversao()"
+                    class="transition-all duration-300 ease-in-out mt-10 bg-purple-700 w-full py-2 rounded-lg text-neutral-100 hover:bg-purple-500">
+                    Converter </button>
             </div>
-
         </div>
 
         <div class="py-10 px-20">
             <div class="flex flex-col">
                 <h1 class="font-bold">O resultado das operações</h1>
-                    <div class="flex flex-row" id="resultado">
-                    </div>
+                <div class="flex flex-row" id="resultado"></div>
             </div>
 
-            <div class="w-full">
-                <button class="transition-all duration-300 ease-in-out mt-10 bg-purple-700 w-full py-2 rounded-lg text-neutral-100 hover:bg-purple-500"> Ir para calculadora </button>
+            <div class="w-full mt-[24vh]" id="btn_calculadora">
+                <button onclick="mostrarCalculadora()"
+                    class="transition-all duration-300 ease-in-out bg-purple-700 w-full py-2 rounded-lg text-neutral-100 hover:bg-purple-500">
+                    Ir para calculadora </button>
             </div>
-
         </div>
     </div>
+
+    <div id="calculadora" class="hidden flex flex-row bg-purple-200 rounded-lg shadow-xl overflow-hidden">
+        <div class="flex items-center flex-col bg-neutral-200 p-10 rounded-lg w-1/2">
+            <h1 class="font-bold mb-6">Calculadora de Bases Numéricas</h1>
+    
+            <div class="w-full pt-4 pb-2">
+                <label for="select_base1" class="opacity-65">Base do primeiro número:</label>
+                <select id="select_base1" class="p-2 rounded-lg w-full mt-1">
+                    <option value="binario">Binário</option>
+                    <option value="octal">Octal</option>
+                    <option value="decimal">Decimal</option>
+                    <option value="hexadecimal">Hexadecimal</option>
+                </select>
+            </div>
+    
+            <div class="grid w-full justify-items-start content-start mt-1">
+                <label for="ipt_valor1" class="mr-4 opacity-65">Digite o primeiro valor</label>
+                <input class="rounded-lg p-2 mt-1 w-full" type="text" id="ipt_valor1" placeholder="Digite o primeiro valor" />
+            </div>
+    
+            <div class="w-full pt-4 pb-2 mt-4">
+                <label for="select_operacao" class="opacity-65">Operação:</label>
+                <select id="select_operacao" class="p-2 rounded-lg w-full mt-1">
+                    <option value="+">Soma</option>
+                    <option value="-">Subtração</option>
+                    <option value="*">Multiplicação</option>
+                    <option value="/">Divisão</option>
+                </select>
+            </div>
+    
+            <div class="w-full pt-4 pb-2 mt-4">
+                <label for="select_base2" class="opacity-65">Base do segundo número:</label>
+                <select id="select_base2" class="p-2 rounded-lg w-full mt-1">
+                    <option value="binario">Binário</option>
+                    <option value="octal">Octal</option>
+                    <option value="decimal">Decimal</option>
+                    <option value="hexadecimal">Hexadecimal</option>
+                </select>
+            </div>
+    
+            <div class="grid w-full justify-items-start content-start mt-1">
+                <label for="ipt_valor2" class="mr-4 opacity-65">Digite o segundo valor</label>
+                <input class="rounded-lg p-2 mt-1 w-full" type="text" id="ipt_valor2" placeholder="Digite o segundo valor" />
+            </div>
+    
+            <div class="w-full mt-10">
+                <button onclick="calcular()"
+                    class="transition-all duration-300 ease-in-out mt-10 bg-purple-700 w-full py-2 rounded-lg text-neutral-100 hover:bg-purple-500">
+                    Calcular </button>
+            </div>
+        </div>
+    
+        <div class="py-10 px-20 w-1/2">
+            <div class="flex flex-col">
+                <h1 class="font-bold">Resultado da operação</h1>
+                <div class="flex flex-row" id="resultado_calculadora"></div>
+            </div>
+    
+            <div class="w-full mt-[24vh]" id="btn_calculadora">
+                <button onclick="mostrarConversor()"
+                    class="transition-all duration-300 ease-in-out bg-purple-700 w-full py-2 rounded-lg text-neutral-100 hover:bg-purple-500">
+                    Ir para conversor</button>
+            </div>
+        </div>
+    </div>
+    
+
 </body>
 
 </html>
-
 <script>
+
     function conversao() {
         const base = select_base.value;
         const valor = ipt_valor.value;
@@ -106,7 +172,6 @@
                     }
                     decimal = parseInt(valor, 16);
                     break;
-
             }
 
             const binario = decimal.toString(2);
@@ -114,18 +179,148 @@
             const hexadecimal = decimal.toString(16).toUpperCase();
 
             resultado.innerHTML += `
-                    
-                    <br>
-                    Decimal <span class="mx-2"> <i class="fa-solid fa-right-long mr-2"></i> ${decimal}<br>  
-                    Binário <span class="mx-2"> <i class="fa-solid fa-right-long mr-2"></i>${binario}<br>
-                    Octal <span class="mx-2"> <i class="fa-solid fa-right-long mr-2"></i> ${octal}<br>
-                    Hexadecimal <span class="mx-2"> <i class="fa-solid fa-right-long mr-2"></i> ${hexadecimal}
-                `;
+                <br>
+                Decimal <span class="mx-2"> <i class="fa-solid fa-right-long mr-2"></i> ${decimal}<br>  
+                Binário <span class="mx-2"> <i class="fa-solid fa-right-long mr-2"></i>${binario}<br>
+                Octal <span class="mx-2"> <i class="fa-solid fa-right-long mr-2"></i> ${octal}<br>
+                Hexadecimal <span class="mx-2"> <i class="fa-solid fa-right-long mr-2"></i> ${hexadecimal}
+            `;
 
             resultado.style.display = "block";
+            document.getElementById("btn_calculadora").classList.replace("mt-[24vh]", "mt-[11vh]");
         } catch (error) {
             alert(error);
             resultado.style.display = "none";
         }
     }
+
+    function mostrarCalculadora() {
+        document.getElementById("conversor").classList.add("hidden");
+        document.getElementById("calculadora").classList.remove("hidden");
+    }
+
+    function mostrarConversor() {
+        document.getElementById("calculadora").classList.add("hidden");
+        document.getElementById("conversor").classList.remove("hidden");
+    }
+
+    function calcular() {
+        const base1 = select_base1.value;
+        const valor1 = ipt_valor1.value;
+        const operacao = select_operacao.value;
+        const base2 = select_base2.value;
+        const valor2 = ipt_valor2.value;
+
+        if (!valor1) {
+            alert("Por favor, insira um valor para converter.");
+            return;
+        }
+
+        if (!valor2) {
+            alert("Por favor, insira um valor para converter.");
+            return;
+        }
+
+        var num1;
+
+        try {
+            switch (base1) {
+                case "binario":
+                    if (!/^[01]+$/.test(valor1)) {
+                        throw "Valor binário inválido.";
+                    }
+                    num1 = parseInt(valor1, 2);
+                    break;
+                case "octal":
+                    if (!/^[0-7]+$/.test(valor1)) {
+                        throw "Valor octal inválido.";
+                    }
+                    num1 = parseInt(valor1, 8);
+                    break;
+                case "decimal":
+                    if (!/^\d+$/.test(valor1)) {
+                        throw "Valor decimal inválido.";
+                    }
+                    num1 = parseInt(valor1, 10);
+                    break;
+                case "hexadecimal":
+                    if (!/^[0-9a-fA-F]+$/.test(valor1)) {
+                        throw "Valor hexadecimal inválido.";
+                    }
+                    num1 = parseInt(valor1, 16);
+                    break;
+                default:
+                    throw "Base do primeiro número inválida.";
+            }
+        } catch (error) {
+            alert(error);
+            return;
+        }
+
+        var num2;
+        try {
+            switch (base2) {
+                case "binario":
+                    if (!/^[01]+$/.test(valor2)) {
+                        throw "Valor binário inválido.";
+                    }
+                    num2 = parseInt(valor2, 2);
+                    break;
+                case "octal":
+                    if (!/^[0-7]+$/.test(valor2)) {
+                        throw "Valor octal inválido.";
+                    }
+                    num2 = parseInt(valor2, 8);
+                    break;
+                case "decimal":
+                    if (!/^\d+$/.test(valor2)) {
+                        throw "Valor decimal inválido.";
+                    }
+                    num2 = parseInt(valor2, 10);
+                    break;
+                case "hexadecimal":
+                    if (!/^[0-9a-fA-F]+$/.test(valor2)) {
+                        throw "Valor hexadecimal inválido.";
+                    }
+                    num2 = parseInt(valor2, 16);
+                    break;
+                default:
+                    throw "Base do segundo número inválida.";
+            }
+        } catch (error) {
+            alert(error);
+            return;
+        }
+
+        var resultadoDecimal;
+        switch (operacao) {
+            case "+":
+                resultadoDecimal = num1 + num2;
+                break;
+            case "-":
+                resultadoDecimal = num1 - num2;
+                break;
+            case "*":
+                resultadoDecimal = num1 * num2;
+                break;
+            case "/":
+                if (num2 === 0) {
+                    alert("Divisão por zero não permitida.");
+                    return;
+                }
+                resultadoDecimal = num1 / num2;
+                break;
+            default:
+                alert("Operação inválida.");
+                return;
+        }
+
+        resultado_calculadora.innerHTML = `
+        Decimal: ${resultadoDecimal} <br>
+        Binário: ${resultadoDecimal.toString(2)} <br>
+        Octal: ${resultadoDecimal.toString(8)} <br>
+        Hexadecimal: ${resultadoDecimal.toString(16).toUpperCase()}
+    `;
+    }
+
 </script>
