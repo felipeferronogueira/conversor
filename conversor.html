@@ -41,21 +41,26 @@
             </div>
 
             <div class="w-full">
-                <button onclick="conversao()"
-                    class="transition-all duration-300 ease-in-out mt-10 bg-purple-700 w-full py-2 rounded-lg text-neutral-100 hover:bg-purple-500">
-                    Converter </button>
+                <button onclick="conversao()" class="transition-all duration-300 ease-in-out mt-10 bg-purple-700 w-full py-2 rounded-lg text-neutral-100 hover:bg-purple-500 hover:scale-105 hover:shadow-lg">
+                    Converter
+                </button>
             </div>
         </div>
 
         <div class="py-10 px-20">
             <div class="flex flex-col">
-                <h1 class="font-bold">O resultado das operações</h1>
-                <div class="flex flex-row" id="resultado"></div>
+                <h1 class="font-bold">O resultado das operações <i class="fa-solid fa-calculator ml-2"></i></h1>
+                <div class="flex flex-row" id="resultado">
+                    <p>Decimal</p>
+                    <p>Binario</p>
+                    <p>Octal</p>
+                    <p>Hexadecimal</p>
+                </div>
             </div>
 
-            <div class="w-full mt-[24vh]" id="btn_calculadora">
+            <div class="w-full mt-[32.4vh]" id="btn_calculadora">
                 <button onclick="mostrarCalculadora()"
-                    class="transition-all duration-300 ease-in-out bg-purple-700 w-full py-2 rounded-lg text-neutral-100 hover:bg-purple-500">
+                    class="transition-all duration-300 ease-in-out bg-purple-700 w-full py-2 rounded-lg text-neutral-100 hover:bg-purple-500 hover:scale-105 hover:shadow-lg">
                     Ir para calculadora </button>
             </div>
         </div>
@@ -63,7 +68,7 @@
 
     <div id="calculadora" class="hidden flex flex-row bg-purple-200 rounded-lg shadow-xl overflow-hidden">
         <div class="flex items-center flex-col bg-neutral-200 p-10 rounded-lg w-1/2">
-            <h1 class="font-bold mb-6">Calculadora de Bases Numéricas</h1>
+            <h1 class="font-bold mb-4">Calculadora de Bases Numéricas</h1>
     
             <div class="w-full pt-4 pb-2">
                 <label for="select_base1" class="opacity-65">Base do primeiro número:</label>
@@ -80,8 +85,8 @@
                 <input class="rounded-lg p-2 mt-1 w-full" type="text" id="ipt_valor1" placeholder="Digite o primeiro valor" />
             </div>
     
-            <div class="w-full pt-4 pb-2 mt-4">
-                <label for="select_operacao" class="opacity-65">Operação:</label>
+            <div class="w-full pt-2 ">
+                <label for="select_operacao" class="opacity-65">Operação</label>
                 <select id="select_operacao" class="p-2 rounded-lg w-full mt-1">
                     <option value="+">Soma</option>
                     <option value="-">Subtração</option>
@@ -90,8 +95,8 @@
                 </select>
             </div>
     
-            <div class="w-full pt-4 pb-2 mt-4">
-                <label for="select_base2" class="opacity-65">Base do segundo número:</label>
+            <div class="w-full pt-2 pb-2">
+                <label for="select_base2" class="opacity-65">Base do segundo número</label>
                 <select id="select_base2" class="p-2 rounded-lg w-full mt-1">
                     <option value="binario">Binário</option>
                     <option value="octal">Octal</option>
@@ -105,7 +110,7 @@
                 <input class="rounded-lg p-2 mt-1 w-full" type="text" id="ipt_valor2" placeholder="Digite o segundo valor" />
             </div>
     
-            <div class="w-full mt-10">
+            <div class="w-full mt-4">
                 <button onclick="calcular()"
                     class="transition-all duration-300 ease-in-out mt-10 bg-purple-700 w-full py-2 rounded-lg text-neutral-100 hover:bg-purple-500">
                     Calcular </button>
@@ -114,18 +119,17 @@
     
         <div class="py-10 px-20 w-1/2">
             <div class="flex flex-col">
-                <h1 class="font-bold">Resultado da operação</h1>
-                <div class="flex flex-row" id="resultado_calculadora"></div>
+                <h1 class="font-bold">Resultado da operação <i class="fa-solid fa-calculator ml-2"></i></h1>
+                <div class="flex flex-row pt-4" id="resultado_calculadora"></div>
             </div>
     
-            <div class="w-full mt-[24vh]" id="btn_calculadora">
+            <div id="btn_calculadora" class="mt-[63.7vh]">
                 <button onclick="mostrarConversor()"
                     class="transition-all duration-300 ease-in-out bg-purple-700 w-full py-2 rounded-lg text-neutral-100 hover:bg-purple-500">
                     Ir para conversor</button>
             </div>
         </div>
     </div>
-    
 
 </body>
 
@@ -187,7 +191,7 @@
             `;
 
             resultado.style.display = "block";
-            document.getElementById("btn_calculadora").classList.replace("mt-[24vh]", "mt-[11vh]");
+            document.getElementById("btn_calculadora").classList.replace("mt-[32.4vh]", "mt-[15.1vh]");
         } catch (error) {
             alert(error);
             resultado.style.display = "none";
@@ -316,11 +320,14 @@
         }
 
         resultado_calculadora.innerHTML = `
-        Decimal: ${resultadoDecimal} <br>
-        Binário: ${resultadoDecimal.toString(2)} <br>
-        Octal: ${resultadoDecimal.toString(8)} <br>
-        Hexadecimal: ${resultadoDecimal.toString(16).toUpperCase()}
-    `;
+            <div class="flex flex-col space-y-2">
+                <p><strong>Decimal</strong> <i class="fa-solid fa-right-long mr-2"></i> ${resultadoDecimal}</p>
+                <p><strong>Binário</strong> <i class="fa-solid fa-right-long mr-2"></i> ${resultadoDecimal.toString(2)}</p>
+                <p><strong>Octal</strong> <i class="fa-solid fa-right-long mr-2"></i> ${resultadoDecimal.toString(8)}</p>
+                <p><strong>Hexadecimal</strong> <i class="fa-solid fa-right-long mr-2"></i> ${resultadoDecimal.toString(16).toUpperCase()}</p>
+            </div>
+        `;
+
     }
 
 </script>
